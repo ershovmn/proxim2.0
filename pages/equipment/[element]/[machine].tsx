@@ -7,6 +7,7 @@ import { isMobile, isBrowser } from 'react-device-detect'
 import Header from '../../../components/Header'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import '../../../src/styles.css'
 
 
 const AboutEquipment = (props : any) => {
