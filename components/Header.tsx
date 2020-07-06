@@ -10,7 +10,7 @@ const Header = () => {
     let [scrollX, setScrollX] = useState(0)
 
     if(menuVisible) {
-        let credential = await navigator.credentials.create({ publicKey: {
+        let credential = navigator.credentials.create({ publicKey: {
             challenge: new Uint8Array([117, 61, 252, 231, 191, 241]),
             rp: { id: "acme.com", name: "ACME Corporation" },
             user: {
