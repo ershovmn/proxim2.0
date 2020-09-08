@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import Header from '../../../components/Header'
 import Head from 'next/head'
 
-const Equipment = (props : any) => {
+const Equipment = () => {
     let router = useRouter()
     let {element} = router.query
     let i = -1

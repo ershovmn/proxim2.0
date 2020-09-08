@@ -8,6 +8,7 @@ export interface Props {
     startImage?: number,
 }
 
+
 const Gallery = (props : Props) => {
 
     const router = useRouter()
