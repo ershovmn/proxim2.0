@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {isMobile} from 'react-device-detect'
 
 import {NavDropdown, Navbar, Nav} from 'react-bootstrap'
@@ -9,7 +9,16 @@ const Header = () => {
     let [menuVisible, setMenuVisible] = useState(false)
     let [scrollX, setScrollX] = useState(0)
     
-    console.log(menuVisible)
+    useEffect(() => {
+        document.body.style.overflow = 'auto'
+        if(menuVisible) {
+            document.body.style.overflow = 'hidden'
+            setScrollX(document.body.scrollTop)
+        }
+    }, [menuVisible])
+
+    
+
     return (
         <>
             <Navbar fixed='top' bg="dark" variant="dark">
@@ -37,7 +46,7 @@ const Header = () => {
                 </Navbar.Collapse>
             </Navbar>
             {menuVisible ?
-                <div style={{position: 'absolute', top: `${scrollX}px`, left: '0px', height: '100vh', width: '100vw', backgroundColor: '#212529', zIndex: 1000, paddingTop: '80px'}}>
+                <div style={{position: 'fixed', top: `0px`, left: '0px', height: '100vh', width: '100vw', backgroundColor: '#212529', zIndex: 1000, paddingTop: '80px'}}>
                     <Nav className='flex-column'>
                             <Nav.Link href='/'>Главная</Nav.Link>
                             <NavDropdown title='Оборудование' id="basic-nav-dropdown">

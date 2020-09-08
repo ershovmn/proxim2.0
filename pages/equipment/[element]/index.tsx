@@ -34,6 +34,14 @@ const Equipment = () => {
             </Head>
             <Header />
             <div style={{marginRight: '1%', marginLeft: '1%', overflowX: 'auto', paddingTop: '70px'}} >
+                <Nav className="flex-column">
+                    {array.map((item, index) => {
+                        if(item.section !== -1) return null
+                        return (
+                            <Nav.Link href={`/equipment/${element}/${index}`}>{item.name}</Nav.Link>
+                        )
+                    })}
+                </Nav>
                 {equipments[i].sections.map((section, ind) => {
                     return (
                         <>
@@ -49,14 +57,6 @@ const Equipment = () => {
                         </>
                     )
                 })}
-                <Nav className="flex-column">
-                    {array.map((item, index) => {
-                        if(item.section !== -1) return null
-                        return (
-                            <Nav.Link href={`/equipment/${element}/${index}`}>{item.name}</Nav.Link>
-                        )
-                    })}
-                </Nav>
             </div>
         </div>
     )

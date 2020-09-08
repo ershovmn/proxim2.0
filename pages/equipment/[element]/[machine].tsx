@@ -7,8 +7,6 @@ import { isMobile, isBrowser } from 'react-device-detect'
 import Header from '../../../components/Header'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-import '../../../src/styles.css'
-
 
 const AboutEquipment = (props : any) => {
     let router = useRouter()
@@ -53,6 +51,7 @@ const AboutEquipment = (props : any) => {
             <Head>
                 <title>{item.name}</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                <link rel="stylesheet" href="/static/styles.css"></link>
             </Head>
             <Header />
             <div style={{marginRight: '1%', marginLeft: '1%', overflowX: 'auto', paddingTop: '70px'}} >

@@ -9,10 +9,11 @@ const Contacts = () => {
         <Head>
             <title>Proxim</title>
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            <link rel="stylesheet" href="/static/styles.css"></link>
         </Head>
         <Header />
-        <div style={{marginRight: '1%', marginLeft: '1%', overflowX: 'auto', paddingTop: '70px'}} >
-            <div style={isMobile ? styleMobile : styleDesktop}>
+        <div className='contacts-main'>
+            <div className='contacts-block'>
                 <div style={{flex: 2}}>
                     <p>
                         Время работы - с 9:00 до 18:00 <br/>
@@ -43,18 +44,5 @@ const Contacts = () => {
     )
 }
 
-const styleDesktop = {
-    marginTop: '10px', 
-    marginLeft: '20px', 
-    marginRight: '20px', 
-    display: 'flex', 
-    flexDirection: 'row'
-}
-
-const styleMobile = {
-    marginTop: '10px', 
-    marginLeft: '20px', 
-    marginRight: '20px', 
-}
 
 export default Contacts

@@ -13,14 +13,15 @@ const Home = () => {
 		  	<Head>
                 <title>Proxim</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+				<link rel="stylesheet" href="/static/styles.css"></link>
             </Head>
 			<Header />
-			<div style={{marginRight: '1%', marginLeft: '1%', overflowX: 'auto', paddingTop: '70px'}} >
-				<div style={{display: 'flex', flexDirection: isMobile ? 'column' : 'row', marginLeft: '30px', marginRight: '30px', marginTop: '10px', flex: 1}}>
-					<div style={{width: isMobile ? '100%' : '60%', marginTop: '40px'}}>
+			<div className='home-main'>
+				<div className='home-block'>
+					<div className='home-galery'>
 						<Gallery images={homeImages} width='100%' />
 					</div>
-					<div style={{marginTop: '50px', marginLeft: '50px', flex: 1, fontSize: '18px'}}>
+					<div className='home-text'>
 						<p>Компания ООО "ПРОКСИМА" осуществляет свою деятельность на российском рынке более 20 лет. Мы специализируемся на разработке, производстве, поставке и сервисном обслуживании оборудования для трафаретной печати, применяемом в малом и среднем бизнесе.</p>
 						<p>Все разработанное оборудование проходит испытание на опытном производстве компании (цех трафаретной печати - шелкография) в реальных условиях эксплуатации. По замечаниям опытного производства происходит модернизация уже выпущенного оборудования.</p>
 						<p>Наши специалисты помогут Вам решить широкий спектр вопросов в области трафаретной печати таких как: выбор необходимого оборудования, обучение Ваших работников, сервисное обслуживание (гарантийное и после гарантийное), оптимизация Вашего технологического процесса и многое другое.</p>
