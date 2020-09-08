@@ -37,8 +37,14 @@ const Gallery = (props : Props) => {
     return (
         <div style={{position: 'relative', zIndex: 1}}>
             <Fullscreen enabled={full}>
-                <img alt='' src={str + props.images[id]} width={full ? '100%' : props.width} height={full ? '100%' : '' }/>
-                <div style={{position: 'absolute', display: 'flex', width: full ? '100%' : props.width, height: '100%', top: '0px'}}>
+                <img  alt='' src={str + props.images[id]} style={{width: full ? '' : props.width, maxHeight: full ? '100%' : '', maxWidth: full ? '100%' : '', marginLeft: 'auto', marginRight: 'auto'}}/>
+                <a onClick={() => scroll(1)} style={{position: 'absolute', top: '50%', marginTop: '-60px', right: '1%'}}>
+                    <img src={str + './static/images/next.png'}/>
+                </a>
+                <a onClick={() => scroll(-1)} style={{position: 'absolute', top: '50%', marginTop: '-60px', left: '1%'}}>
+                    <img src={str + './static/images/prev.png'}/>
+                </a>
+                {/* <div style={{position: 'absolute', display: 'flex', width: full ? '100%' : props.width, height: '100%', top: '0px'}}>
                     <div 
                         onClick={() => scroll(-1)} 
                         onMouseEnter={() => setLeftButton(true)}
@@ -52,7 +58,7 @@ const Gallery = (props : Props) => {
                         onMouseLeave={() => setRightButton(false)}
                         style={{height: '100%', flex: '1', backgroundColor: rightButton ? 'grey' : '', opacity: '0.3'}}>
                     </div>
-                </div>
+                </div> */}
             </Fullscreen>
         </div>
     )
