@@ -48,7 +48,7 @@ const AboutEquipment = (props : any) => {
 
     return (
         <div>
-            <Head>
+            <Head> 
                 <title>{item.name}</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <link rel="stylesheet" href="/static/styles.css"></link>
