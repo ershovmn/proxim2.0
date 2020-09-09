@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Fullscreen from "react-full-screen"
 import { useRouter } from 'next/router'
 
@@ -12,6 +12,18 @@ export interface Props {
 const Gallery = (props : Props) => {
 
     const router = useRouter()
+
+    let [id, setID] = useState(0)
+    let [full, setFull] = useState(false)
+    let [leftButton, setLeftButton] = useState(false)
+    let [rightButton, setRightButton] = useState(false)
+
+    useEffect(() => {
+        props.images.map(image => {
+            let img = new Image();
+            img.src = image;
+        })
+    }, [])
 
     let len = router.pathname.split('/').length - 2
     let str = ''
@@ -29,10 +41,6 @@ const Gallery = (props : Props) => {
         setID(newID)
     }
 
-    let [id, setID] = useState(0)
-    let [full, setFull] = useState(false)
-    let [leftButton, setLeftButton] = useState(false)
-    let [rightButton, setRightButton] = useState(false)
 
     return (
         <div style={{position: 'relative', zIndex: 1}}>
