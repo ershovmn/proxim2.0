@@ -37,13 +37,17 @@ const Gallery = (props : Props) => {
     return (
         <div style={{position: 'relative', zIndex: 1}}>
             <Fullscreen enabled={full}>
-                <img  alt='' src={str + props.images[id]} style={{width: full ? '' : props.width, maxHeight: full ? '100%' : '', maxWidth: full ? '100%' : '', marginLeft: 'auto', marginRight: 'auto'}}/>
-                <a onClick={() => scroll(1)} style={{position: 'absolute', top: '50%', marginTop: '-60px', right: '1%'}}>
-                    <img src={str + './static/images/next.png'}/>
-                </a>
-                <a onClick={() => scroll(-1)} style={{position: 'absolute', top: '50%', marginTop: '-60px', left: '1%'}}>
-                    <img src={str + './static/images/prev.png'}/>
-                </a>
+                <img onLoad={() => console.log('load')} alt='' src={str + props.images[id]} style={{width: full ? '' : props.width, maxHeight: full ? '100%' : '', maxWidth: full ? '100%' : '', marginLeft: 'auto', marginRight: 'auto'}}/>
+                { id < props.images.length - 1 ?
+                    <a onClick={() => scroll(1)} style={{position: 'absolute', top: '50%', marginTop: '-10%', right: '1%', height: '20%'}}>
+                        <img src={str + './static/images/next.png'} height='100%'/>
+                    </a> : null
+                }
+                { id > 0 ?
+                    <a onClick={() => scroll(-1)} style={{position: 'absolute', top: '50%', marginTop: '-10%', left: '1%', height: '20%'}}>
+                        <img src={str + './static/images/prev.png'} height='100%'/>
+                    </a> : null
+                }
                 {/* <div style={{position: 'absolute', display: 'flex', width: full ? '100%' : props.width, height: '100%', top: '0px'}}>
                     <div 
                         onClick={() => scroll(-1)} 
