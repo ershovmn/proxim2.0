@@ -75,3 +75,7 @@ table, th, td {
         flex-direction: row;
     }
 }
+
+.custom {
+    width: 100%;
+}
