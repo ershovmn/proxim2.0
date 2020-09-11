@@ -59,11 +59,11 @@ const equipments = [
             'Термо-пресса для сублимации',
         ],
         items: [
-            {
-                name: 'Станок для трафаретной печати карусельного типа', 
+            { name: 'Станок для трафаретной печати карусельного типа', 
                 images: [
-                    './static/images/Karusel4kh4_1.jpg',
-                    './static/images/Karusel4kh4_2.jpg',
+                    './static/images/karusel/1.jpg',
+                    './static/images/karusel/2.jpg',
+                    './static/images/karusel/3.jpg',
                 ],
                 desription: <>
                     <p>Карусельные установки предназначены для профессиональной многокрасочной и полноцветной печати по различным материалам.</p>
@@ -111,10 +111,14 @@ const equipments = [
                 ],
                 section: 0,
             },
-            {
-                name: 'Термопресс ТП*00', 
+            { name: 'Термопресс ТП*00', 
                 images: [
-                    './static/images/TP800.jpg',
+                    './static/images/TP600/1.jpg',
+                    './static/images/TP600/2.jpg',
+                    './static/images/TP600/3.jpg',
+                    './static/images/TP600/4.jpg',
+                    './static/images/TP600/5.jpg',
+                    './static/images/TP600/6.jpg',
                 ], 
                 desription: <>
                     <p>Пневматический поворотный  термопресс модели ТП  предназначен для термотрансферного и сублимационного переноса изображений на различные материалы (футболки, толстовки, спецодежду из смесовых и натуральных тканей, сумки, и  другие)</p>
@@ -183,6 +187,15 @@ const equipments = [
                 ],
                 section: 1,
             },
+            { name: 'Плоско-печатный станок с вакумным прижимом',
+                images: [
+                    './static/images/psvp/1.jpg',
+                    './static/images/psvp/1.jpg',
+                ],
+                models: [],
+                desription: <> </>,
+                section: 0,
+            }
         ]
     },
     {
@@ -194,16 +207,25 @@ const equipments = [
             'Ультрафиолетовые сушки',
         ],
         items: [
-            {
-                name: 'Сушильная камера проходного типа Прометей 27М( данное название уточним позже)', 
-                images: [], 
+            { name: 'Сушильная камера проходного типа Прометей 27М( данное название уточним позже)', 
+                images: [
+                    './static/images/27/1.jpg',
+                    './static/images/27/2.jpg',
+                    './static/images/27/3.jpg',
+                    './static/images/27/4.jpg',
+                    './static/images/27/5.jpg',
+                ], 
                 desription: <></>,
                 models: [],
                 section: 2,
             },
-            {
-                name: 'Тоннельная сушка конвейерного типа Прометей 8М', 
-                images: [], 
+            { name: 'Тоннельная сушка конвейерного типа Прометей 8М', 
+                images: [
+                    './static/images/8M/1.jpg',
+                    './static/images/8M/2.jpg',
+                    './static/images/8M/3.jpg',
+                    './static/images/8M/4.jpg',
+                ], 
                 desription: <>
                     <p>Туннельная сушка предназначена для окончательной сушки трафаретных оттисков. </p>
                     <p>Туннельная сушка снабжена блоком управления, на котором расположены:
@@ -274,9 +296,12 @@ const equipments = [
                 models: [],
                 section: 0,
             },
-            {
-                name: 'Тоннельная сушка конвейерного типа ПРОМЕТЕЙ-21-800', 
-                images: [], 
+            { name: 'Тоннельная сушка конвейерного типа ПРОМЕТЕЙ-21-800', 
+                images: [
+                    './static/images/21-800/1.jpg',
+                    './static/images/21-800/2.jpg',
+                    './static/images/21-800/3.jpg',
+                ], 
                 desription: <>
                     <p>Туннельная сушка предназначена для окончательной сушки трафаретных оттисков. </p>
                     <p>Туннельная сушка снабжена блоком управления, на котором расположены:
@@ -347,9 +372,13 @@ const equipments = [
                 models: [],
                 section: 0,
             },
-            {
-                name: 'Тоннельная сушка конвейерного типа ПРОМЕТЕЙ 4-30-11000', 
-                images: [], 
+            { name: 'Тоннельная сушка конвейерного типа ПРОМЕТЕЙ 4-30-11000', 
+                images: [
+                    './static/images/4-30-1100/1.jpg',
+                    './static/images/4-30-1100/2.jpg',
+                    './static/images/4-30-1100/3.jpg',
+                    './static/images/4-30-1100/4.jpg',
+                ], 
                 desription: <>
                     <p>Туннельная сушка предназначена для окончательной сушки трафаретных оттисков. </p>
                     <p>Туннельная сушка снабжена блоком управления, на котором расположены:
@@ -420,22 +449,20 @@ const equipments = [
                 models: [],
                 section: 0,
             },
-            {
-                name: 'Промежуточная сушка кпс 6 380V', 
+            { name: 'Промежуточная сушка кпс 6 380V', 
                 images: [
-                    './static/images/KPS6_1.jpg',
-                    './static/images/KPS6_2.jpg',
+                    './static/images/kps6/1.jpg',
+                    './static/images/kps6/2.jpg',
                 ], 
                 desription: descriptionKPS,
                 models: [],
                 section: 1,
             },
-            {
-                name: 'Промежуточная сушка кпс 6 авто 380V', 
+            { name: 'Промежуточная сушка кпс 6 авто 380V', 
                 images: [
-                    '/KPS6auto_1.jpg',
-                    './static/images/KPS6auto_2.jpg',
-                    './static/images/KPS6auto_3.jpg',
+                    './static/images/kps6auto/1.jpg',
+                    './static/images/kps6auto/2.jpg',
+                    './static/images/kps6auto/3.jpg',
                 ], 
                 desription: descriptionKPS,
                 models: [],
@@ -449,11 +476,10 @@ const equipments = [
         sections: [
             'Экспанирующие устройства',
             'Моечные кабины',
-            'Сушильные шкафы'
+            'Сушильные шкафы',
         ],
         items: [
-            {
-                name: 'Сушильный шкаф',
+            { name: 'Сушильный шкаф',
                 images: [],
                 section: 2,
                 models: [],
@@ -491,9 +517,11 @@ const equipments = [
                         </div>
                     </>
             },
-            {
-                name: 'Кабина для подготовки трафаретных рамок (модель – МК-2)',
-                images: [],
+            { name: 'Кабина для подготовки трафаретных рамок (модель – МК-2)',
+                images: [
+                    './static/images/MK2/1.jpg',
+                    './static/images/MK2/2.jpg',
+                ],
                 desription: 
                     <>
                         <p>
@@ -524,8 +552,7 @@ const equipments = [
                 models: [],
                 section: 1,
             },
-            {
-                name: 'Профессиональный экспозиционный стол (модель «ПЭС-Х»)',
+            { name: 'Профессиональный экспозиционный стол (модель «ПЭС-Х»)',
                 desription: 
                     <>
                         <p>
@@ -576,9 +603,11 @@ const equipments = [
                         </div>
                     </>,
                 models: [],
-                images: [],
+                images: [
+                    './static/images/exp/1.jpg',
+                ],
                 section: 0,
-            }
+            },
         ]
     }
 ]
