@@ -605,6 +605,7 @@ const equipments = [
                 models: [],
                 images: [
                     './static/images/exp/1.jpg',
+                    './static/images/exp/2.jpg',
                 ],
                 section: 0,
             },
@@ -613,14 +614,12 @@ const equipments = [
 ]
 
 export const homeImages = [
-    './static/images/Karusel4kh4_1.jpg',
-    './static/images/KPS6auto_3.jpg',
-    './static/images/KPS6_1.jpg',
+    './static/images/karusel/1.jpg',
+    './static/images/MK2/1.jpg',
+    './static/images/exp/1.jpg',
     './static/images/TP800.jpg',
-    './static/images/KPS6auto_2.jpg',
-    './static/images/KPS6_2.jpg',
-    './static/images/Karusel4kh4_2.jpg',
-    './static/images/KPS6auto_1.jpg',
+    './static/images/kps6/2.jpg',
+    './static/images/psvp/1.jpg',
 ]
 
 export default equipments;
