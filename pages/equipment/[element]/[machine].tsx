@@ -16,7 +16,7 @@ const  AboutEquipment = (props : any) => {
 
     useEffect(() => {
         async function fetchMyApi() {
-            const res = await fetch('/api/data')
+            const res = await fetch('http://localhost:8000/getdata')
 			const data = await res.json()
 			console.log(data)
             setEquipments(data.equipments)

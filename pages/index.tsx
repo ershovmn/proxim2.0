@@ -12,9 +12,13 @@ const Home = () => {
 	let [homeData, setHomeData] = useState({images: [], desription: ''})
     let [loading, setLoading] = useState(true)
 
+	console.log(process.env.NEXT_PUBLIC_ENV_VARIABLE)
+	console.log(process.env.NEXT_PUBLIC_ENV_PROXIM_API)
+
     useEffect(() => {
         async function fetchMyApi() {
-            const res = await fetch('/api/data')
+			const res = await fetch(process.env.NEXT_PUBLIC_ENV_PROXIM_API + 'getdata')
+			console.log('load')
 			const data = await res.json()
 			console.log(data)
             setHomeData(data.home)
@@ -37,7 +41,7 @@ const Home = () => {
 			<div className='home-main'>
 				<div className='home-block'>
 					<div className='home-galery'>
-						<Gallery images={homeData.images} width='100%'/>
+						<Gallery images={homeData.images.map(i => process.env.NEXT_PUBLIC_ENV_PROXIM_API + 'img/' + i)} width='100%'/>
 					</div>
 					<div className='home-text'>
 						{convertDataToHtml(homeData.desription)}

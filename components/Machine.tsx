@@ -174,7 +174,7 @@ const Machine = (props : any) => {
                     <div>
                         <div style={{display: 'flex', flexDirection: 'row'}}>
                             <div style={{flex: 2}}>
-                                <Gallery width='100%' images={item.images} />
+                                <Gallery width='100%' images={item.images.map(i => process.env.NEXT_PUBLIC_ENV_PROXIM_API + 'img/' + i)} />
                             </div>
                             <div style={{flex: 1}}/>
                             <div style={{flex: 1}}>
