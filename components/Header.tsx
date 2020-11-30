@@ -2,12 +2,17 @@ import React, {useState, useEffect} from 'react'
 import {isMobile} from 'react-device-detect'
 
 import {NavDropdown, Navbar, Nav} from 'react-bootstrap'
-import equipments from '../src/equipments'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Header = () => {
     let [menuVisible, setMenuVisible] = useState(false)
     let [scrollX, setScrollX] = useState(0)
+
+    let equipments = require('../public/static/data/equipments.json')
+
+    useEffect(() => {
+        document.body.style.setProperty('padding-top', '70px')
+    }, [])
     
     useEffect(() => {
         document.body.style.overflow = 'auto'
@@ -16,8 +21,6 @@ const Header = () => {
             setScrollX(document.body.scrollTop)
         }
     }, [menuVisible])
-
-    
 
     return (
         <>
@@ -30,8 +33,7 @@ const Header = () => {
                             <>
                             <Nav.Link href='/'>Главная</Nav.Link>
                             <NavDropdown title='Оборудование' id="basic-nav-dropdown">
-                                {
-                                    equipments.map((equipment, index) => {
+                                {equipments.map((equipment, index) => {
                                         return (
                                             <NavDropdown.Item href={`/equipment/${equipment.id}`} key={index}>{equipment.name}</NavDropdown.Item>
                                         )

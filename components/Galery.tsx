@@ -41,11 +41,16 @@ const Gallery = (props : Props) => {
         setID(newID)
     }
 
+    console.log(id < props.images.length - 1, id, props.images.length - 1) 
 
     return (
-        <div style={{position: 'relative', zIndex: 1}}>
+        <div style={{position: 'relative', zIndex: 1, width: '100%', paddingTop: '56.25%'}}>
             <Fullscreen enabled={full}>
-                <img onLoad={() => console.log('load')} alt='' src={str + props.images[id]} style={{width: full ? '' : props.width, maxHeight: full ? '100%' : '', maxWidth: full ? '100%' : '', marginLeft: 'auto', marginRight: 'auto'}}/>
+                <img onLoad={() => console.log('load')} alt='' src={props.images[id]} 
+                    onDoubleClick={() => setFull(!full)}
+                    //style={{width: full ? '' : props.width, maxHeight: full ? '100%' : '', maxWidth: full ? '100%' : '', marginLeft: 'auto', marginRight: 'auto'}}
+                    style={{position: 'absolute', top: '0px', left: '0px', width: '100%', height: '100%', objectFit: 'contain'}}
+                /> 
                 { id < props.images.length - 1 ?
                     <a onClick={() => scroll(1)} style={{position: 'absolute', top: '50%', marginTop: '-10%', right: '1%', height: '20%'}}>
                         <img src={str + './static/images/next.png'} height='100%'/>
@@ -56,21 +61,6 @@ const Gallery = (props : Props) => {
                         <img src={str + './static/images/prev.png'} height='100%'/>
                     </a> : null
                 }
-                {/* <div style={{position: 'absolute', display: 'flex', width: full ? '100%' : props.width, height: '100%', top: '0px'}}>
-                    <div 
-                        onClick={() => scroll(-1)} 
-                        onMouseEnter={() => setLeftButton(true)}
-                        onMouseLeave={() => setLeftButton(false)}
-                        style={{height: '100%', flex: '1', backgroundColor: leftButton ? 'grey' : '', opacity: '0.3'}}>
-                    </div>
-                    <div onDoubleClick={() => setFull(!full)} style={{height: '100%', flex: '3'}}/>
-                    <div
-                        onClick={() => scroll(1)} 
-                        onMouseEnter={() => setRightButton(true)}
-                        onMouseLeave={() => setRightButton(false)}
-                        style={{height: '100%', flex: '1', backgroundColor: rightButton ? 'grey' : '', opacity: '0.3'}}>
-                    </div>
-                </div> */}
             </Fullscreen>
         </div>
     )
