@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Gallery from '../components/Galery'
 import { isMobile } from 'react-device-detect'
 import {homeImages} from '../src/equipments'
@@ -9,7 +9,23 @@ import { convertDataToHtml } from '../components/Machine'
 
 const Home = () => {
 	console.log('hi')
-	let data = require('../public/static/data/home.json')
+	let [homeData, setHomeData] = useState({images: [], desription: ''})
+    let [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        async function fetchMyApi() {
+            const res = await fetch('/api/data')
+			const data = await res.json()
+			console.log(data)
+            setHomeData(data.home)
+            setLoading(false)
+        }
+        fetchMyApi()
+	}, [])
+	
+	if(loading) {
+		return <></>
+	}
     return(
       	<>
 		  	<Head>
@@ -21,10 +37,10 @@ const Home = () => {
 			<div className='home-main'>
 				<div className='home-block'>
 					<div className='home-galery'>
-						<Gallery images={data.images} width='100%'/>
+						<Gallery images={homeData.images} width='100%'/>
 					</div>
 					<div className='home-text'>
-						{convertDataToHtml(data.desription)}
+						{convertDataToHtml(homeData.desription)}
 					</div>
 				</div>
 			</div>

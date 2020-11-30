@@ -11,11 +11,25 @@ import fs  from 'fs'
 import Machine from '../../../components/Machine'
 
 const  AboutEquipment = (props : any) => {
-    let equipments = require('../../../public/static/data/equipments.json')
+    let [equipments, setEquipments] = useState([])
+    let [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        async function fetchMyApi() {
+            const res = await fetch('/api/data')
+			const data = await res.json()
+			console.log(data)
+            setEquipments(data.equipments)
+            setLoading(false)
+        }
+        fetchMyApi()
+        document.body.style.setProperty('padding-top', '70px')
+	}, [])
     let router = useRouter()
     const myRef = useRef(null)
     const {element, machine} = router.query
 
+    if(loading) return <></>
 
     console.log(equipments)
 

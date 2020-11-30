@@ -5,21 +5,40 @@ import Header from '../../components/Header'
 import Machine from '../../components/Machine'
 
 const AdminPanel = () => {
-    let [equipments, setEquipments] = useState(require('../../public/static/data/equipments.json'))
+    let [equipments, setEquipments] = useState([])
     let [section, setSection] = useState(-1)
     let [productID, setProductID] = useState(-1)
     let [product, setProduct] = useState(undefined)
 
-    let [homeDes, setHomeDes] = useState(require('../../public/static/data/home.json').desription)
-    let [homeImages, setHomeImages] = useState(require('../../public/static/data/home.json').images)
+    let [homeDes, setHomeDes] = useState('')
+    let [homeImages, setHomeImages] = useState([])
 
     let [newSection, setNewSection] = useState('')
     let [newSubSection, setNewSubSection] = useState('')
 
     let [newModel, setNewModel] = useState('')
 
+    let [loading, setLoading] = useState(true)
+
     let myRef = useRef(null)
     let myRef1 = useRef(null)
+
+    useEffect(() => {
+        async function fetchMyApi() {
+            const res = await fetch('/api/data')
+			const data = await res.json()
+			console.log(data)
+            setEquipments(data.equipments)
+            setLoading(false)
+            setHomeImages(data.home.images)
+            setHomeDes(data.home.desription)
+        }
+        fetchMyApi()
+    }, [])
+
+    if(loading) {
+        return <></>
+    }
 
     let sections = equipments.map(item => item.name)
     //let section : number | undefined = undefined

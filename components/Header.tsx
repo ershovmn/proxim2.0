@@ -8,11 +8,20 @@ const Header = () => {
     let [menuVisible, setMenuVisible] = useState(false)
     let [scrollX, setScrollX] = useState(0)
 
-    let equipments = require('../public/static/data/equipments.json')
+    let [equipments, setEquipments] = useState([])
+    let [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        async function fetchMyApi() {
+            const res = await fetch('/api/data')
+			const data = await res.json()
+			console.log(data)
+            setEquipments(data.equipments)
+            setLoading(false)
+        }
+        fetchMyApi()
         document.body.style.setProperty('padding-top', '70px')
-    }, [])
+	}, [])
     
     useEffect(() => {
         document.body.style.overflow = 'auto'
@@ -33,7 +42,8 @@ const Header = () => {
                             <>
                             <Nav.Link href='/'>Главная</Nav.Link>
                             <NavDropdown title='Оборудование' id="basic-nav-dropdown">
-                                {equipments.map((equipment, index) => {
+                                { loading ? null :
+                                    equipments.map((equipment, index) => {
                                         return (
                                             <NavDropdown.Item href={`/equipment/${equipment.id}`} key={index}>{equipment.name}</NavDropdown.Item>
                                         )
