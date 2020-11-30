@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {Nav} from 'react-bootstrap'
-import equipments from '../../../src/equipments'
 import { useRouter } from 'next/router'
 import Header from '../../../components/Header'
 import Head from 'next/head'
 
 const Equipment = () => {
+    let equipments = require('../../../public/static/data/equipments.json')
     let router = useRouter()
     let {element} = router.query
     let i = -1
@@ -33,7 +33,7 @@ const Equipment = () => {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <Header />
-            <div style={{marginRight: '1%', marginLeft: '1%', overflowX: 'auto', paddingTop: '70px'}} >
+            <div style={{marginRight: '1%', marginLeft: '1%', overflowX: 'auto'}} >
                 <Nav className="flex-column">
                     {array.map((item, index) => {
                         if(item.section !== -1) return null
