@@ -10,10 +10,8 @@ export const config = {
   }
 
 export default (req : NextApiRequest, res : NextApiResponse) => {
-    console.log(req.body)
-    console.log(req.body)
-    fs.writeFileSync('./public/static/data/equipments.json', JSON.stringify(req.body.equipments))
-    fs.writeFileSync('./public/static/data/home.json', JSON.stringify(req.body.home))
+    fs.writeFileSync('./public/data/equipments.json', JSON.stringify(req.body.equipments))
+    fs.writeFileSync('./public/data/home.json', JSON.stringify(req.body.home))
     res.status(200)
     res.end()
 }

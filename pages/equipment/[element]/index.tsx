@@ -5,7 +5,20 @@ import Header from '../../../components/Header'
 import Head from 'next/head'
 
 const Equipment = () => {
-    let equipments = require('../../../public/static/data/equipments.json')
+    let [equipments, setEquipments] = useState([])
+    let [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        async function fetchMyApi() {
+            const res = await fetch('http://localhost:8000/getdata')
+			const data = await res.json()
+			console.log(data)
+            setEquipments(data.equipments)
+            setLoading(false)
+        }
+        fetchMyApi()
+        document.body.style.setProperty('padding-top', '70px')
+	}, [])
     let router = useRouter()
     let {element} = router.query
     let i = -1

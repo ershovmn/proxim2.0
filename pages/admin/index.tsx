@@ -5,21 +5,40 @@ import Header from '../../components/Header'
 import Machine from '../../components/Machine'
 
 const AdminPanel = () => {
-    let [equipments, setEquipments] = useState(require('../../public/static/data/equipments.json'))
+    let [equipments, setEquipments] = useState([])
     let [section, setSection] = useState(-1)
     let [productID, setProductID] = useState(-1)
     let [product, setProduct] = useState(undefined)
 
-    let [homeDes, setHomeDes] = useState(require('../../public/static/data/home.json').desription)
-    let [homeImages, setHomeImages] = useState(require('../../public/static/data/home.json').images)
+    let [homeDes, setHomeDes] = useState('')
+    let [homeImages, setHomeImages] = useState([])
 
     let [newSection, setNewSection] = useState('')
     let [newSubSection, setNewSubSection] = useState('')
 
     let [newModel, setNewModel] = useState('')
 
+    let [loading, setLoading] = useState(true)
+
     let myRef = useRef(null)
     let myRef1 = useRef(null)
+
+    useEffect(() => {
+        async function fetchMyApi() {
+            const res = await fetch(process.env.NEXT_PUBLIC_ENV_PROXIM_API + 'getdata')
+			const data = await res.json()
+			console.log(data)
+            setEquipments(data.equipments)
+            setLoading(false)
+            setHomeImages(data.home.images)
+            setHomeDes(data.home.desription)
+        }
+        fetchMyApi()
+    }, [])
+
+    if(loading) {
+        return <></>
+    }
 
     let sections = equipments.map(item => item.name)
     //let section : number | undefined = undefined
@@ -83,7 +102,7 @@ const AdminPanel = () => {
     }
 
     const saveChanges = () => {
-        fetch('/api/saveData',{
+        fetch(process.env.NEXT_PUBLIC_ENV_PROXIM_API + 'savedata',{
             method: 'POST',
             body: JSON.stringify({equipments: equipments, home: {desription: homeDes, images: homeImages}}),
             headers: {
@@ -132,7 +151,7 @@ const AdminPanel = () => {
                         setHomeDes(e.target.value)
                     }}/>
                     <Form.Label>Изображения</Form.Label>
-                    <div style={{width: '50vw', height: '200px', overflowX: 'auto'}}>
+                    <div style={{width: '100vw', height: '200px', overflowX: 'auto'}}>
                         <div style={{width: 'max-content', display: 'flex', flexDirection: 'row'}}>
                             {homeImages.map((image, idx) =>
                                 <div style={{position: 'relative'}}>
@@ -141,28 +160,29 @@ const AdminPanel = () => {
                                         clone.splice(idx, 1)
                                         setHomeImages(clone)
                                     }} src='/static/images/delete.png' height='25em' /> 
-                                    <img src={image} height='200px' />
+                                    <img src={process.env.NEXT_PUBLIC_ENV_PROXIM_API + 'img/' + image} height='180px' />
                                 </div>
                             )}
                             <>
                             <input ref={myRef1} type='file' multiple accept='image/*' name='photo'/>
                             <Button onClick={() => {
                                 console.log(myRef1.current.files.length)
-                                for(let i = 0; i <  myRef1.current.files.length; i++) {
-                                    const formData = new FormData()
-                                    let file = myRef1.current.files[i]
-                                    formData.append('file', file)
-                                    fetch('/api/uploadImages', {
-                                        method: 'POST',
-                                        body: formData
-                                    }).then(res => res.json())
-                                    .then(data => {
-                                        let path_name = data.name.replace('public', '')
-                                        let clone = [...homeImages]
-                                        clone.push(path_name)
-                                        setHomeImages(clone)
-                                    })
+                                const formData = new FormData()
+                                for(let i = 0; i < myRef1.current.files.length; i++) {
+                                    formData.append('file', myRef1.current.files[i])
                                 }
+                                fetch(process.env.NEXT_PUBLIC_ENV_PROXIM_API + 'uploadimages', {
+                                    method: 'POST',
+                                    body: formData
+                                }).then(res => res.json())
+                                .then(data => {
+                                    let path_name = data.names
+                                    console.log(path_name)
+                                    let clone = [...homeImages]
+                                    clone = clone.concat(path_name)
+                                    console.log(clone)
+                                    setHomeImages(clone)
+                                })
                             }}>Добавить</Button>
                             </>
                         </div>
@@ -255,33 +275,28 @@ const AdminPanel = () => {
                                                     console.log(clone)
                                                     setProduct(clone)
                                                 }} src='/static/images/delete.png' height='25em' /> 
-                                                <img src={image} height='200px' />
+                                                <img src={process.env.NEXT_PUBLIC_ENV_PROXIM_API + 'img/' + image} height='180px' />
                                             </div>
                                         )}
                                         <>
                                         <input ref={myRef} type='file' multiple accept='image/*' name='photo'/>
                                         <Button onClick={() => {
                                             console.log(myRef.current.files.length)
-                                            for(let i = 0; i <  myRef.current.files.length; i++) {
-                                                const formData = new FormData()
-                                                let file = myRef.current.files[i]
-                                                formData.append('file', file)
-                                                fetch('/api/uploadImages', {
-                                                    method: 'POST',
-                                                    // mode: 'no-cors',
-                                                    // cache: 'no-cache',
-                                                    // headers: {
-                                                    //     'Content-Type': 'multipart/form-data;boundary=<calculated when request is sent>'
-                                                    // },
-                                                    body: formData
-                                                }).then(res => res.json())
-                                                .then(data => {
-                                                    let path_name = data.name.replace('public', '')
-                                                    let clone = {...product}
-                                                    clone.images.push(path_name)
-                                                    setProduct(clone)
-                                                })
+                                            const formData = new FormData()
+                                            for(let i = 0; i < myRef.current.files.length; i++) {
+                                                formData.append('file', myRef.current.files[i])
                                             }
+                                            fetch(process.env.NEXT_PUBLIC_ENV_PROXIM_API + 'uploadimages', {
+                                                method: 'POST',
+                                                body: formData
+                                            }).then(res => res.json())
+                                            .then(data => {
+                                                let path_name = data.names
+                                                let clone = {...product}
+                                                clone.images = clone.images.concat(path_name)
+                                                setProduct(clone)
+                                            })
+                                            
                                             //let file = myRef.current.files[0]
                                         }}>Добавить</Button>
                                         </>
