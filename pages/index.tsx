@@ -6,6 +6,7 @@ import Header from '../components/Header'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Head from 'next/head'
 import { convertDataToHtml } from '../components/Machine'
+import HomeComponent from '../components/HomeComponent'
 
 const Home = () => {
 	console.log('hi')
@@ -38,17 +39,7 @@ const Home = () => {
 				<link rel="stylesheet" href="/static/styles.css"></link>
             </Head>
 			<Header />
-			<div className='home-main'>
-				<div className='home-block'>
-					<div className='home-galery'>
-						<Gallery images={homeData.images.map(i => process.env.NEXT_PUBLIC_ENV_PROXIM_API + 'img/' + i)} width='100%'/>
-					</div>
-					<div className='home-text'>
-						{convertDataToHtml(homeData.desription)}
-					</div>
-				</div>
-			</div>
-			
+			<HomeComponent images={homeData.images} desription={homeData.desription}/>
         </>
     )
 }

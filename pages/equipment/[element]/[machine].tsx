@@ -16,7 +16,7 @@ const  AboutEquipment = (props : any) => {
 
     useEffect(() => {
         async function fetchMyApi() {
-            const res = await fetch('http://localhost:8000/getdata')
+            const res = await fetch(process.env.NEXT_PUBLIC_ENV_PROXIM_API + 'getdata')
 			const data = await res.json()
 			console.log(data)
             setEquipments(data.equipments)
