@@ -2,6 +2,7 @@ import Head from 'next/head'
 import React, { useState, useEffect, useRef } from 'react'
 import { Button, Form, FormControl, ListGroup, Nav } from 'react-bootstrap'
 import Header from '../../components/Header'
+import HomeComponent from '../../components/HomeComponent'
 import Machine from '../../components/Machine'
 
 const AdminPanel = () => {
@@ -147,44 +148,52 @@ const AdminPanel = () => {
                             <Form.Control onKeyPress={addNewSection} value={newSection} onChange={(e) => setNewSection(e.target.value)} type='text' width='50%'/>
                         </Nav>
                     <Form.Label>Главная страница</Form.Label>
-                    <FormControl as='textarea' rows={10} value={homeDes} onChange={(e) => {
-                        setHomeDes(e.target.value)
-                    }}/>
-                    <Form.Label>Изображения</Form.Label>
-                    <div style={{width: '100vw', height: '200px', overflowX: 'auto'}}>
-                        <div style={{width: 'max-content', display: 'flex', flexDirection: 'row'}}>
-                            {homeImages.map((image, idx) =>
-                                <div style={{position: 'relative'}}>
-                                    <img style={{position: 'absolute', top: '0px', right: '0px'}} onClick={() => {
+                    <div style={{display: 'flex', flexDirection: 'row'}}>
+                        <div style={{flex: 1}}>
+                        <FormControl as='textarea' rows={10} value={homeDes} onChange={(e) => {
+                            setHomeDes(e.target.value)
+                        }}/>
+                        <Form.Label>Изображения</Form.Label>
+                    
+                        <div style={{width: '50vw', height: '200px', overflowX: 'auto'}}>
+                            <div style={{width: 'max-content', display: 'flex', flexDirection: 'row'}}>
+                                {homeImages.map((image, idx) =>
+                                    <div style={{position: 'relative'}}>
+                                        <img style={{position: 'absolute', top: '0px', right: '0px'}} onClick={() => {
+                                            let clone = [...homeImages]
+                                            clone.splice(idx, 1)
+                                            setHomeImages(clone)
+                                        }} src='/static/images/delete.png' height='25em' /> 
+                                        <img src={process.env.NEXT_PUBLIC_ENV_PROXIM_API + 'img/' + image} height='180px' />
+                                    </div>
+                                )}
+                                <>
+                                <input ref={myRef1} type='file' multiple accept='image/*' name='photo'/>
+                                <Button onClick={() => {
+                                    console.log(myRef1.current.files.length)
+                                    const formData = new FormData()
+                                    for(let i = 0; i < myRef1.current.files.length; i++) {
+                                        formData.append('file', myRef1.current.files[i])
+                                    }
+                                    fetch(process.env.NEXT_PUBLIC_ENV_PROXIM_API + 'uploadimages', {
+                                        method: 'POST',
+                                        body: formData
+                                    }).then(res => res.json())
+                                    .then(data => {
+                                        let path_name = data.names
+                                        console.log(path_name)
                                         let clone = [...homeImages]
-                                        clone.splice(idx, 1)
+                                        clone = clone.concat(path_name)
+                                        console.log(clone)
                                         setHomeImages(clone)
-                                    }} src='/static/images/delete.png' height='25em' /> 
-                                    <img src={process.env.NEXT_PUBLIC_ENV_PROXIM_API + 'img/' + image} height='180px' />
-                                </div>
-                            )}
-                            <>
-                            <input ref={myRef1} type='file' multiple accept='image/*' name='photo'/>
-                            <Button onClick={() => {
-                                console.log(myRef1.current.files.length)
-                                const formData = new FormData()
-                                for(let i = 0; i < myRef1.current.files.length; i++) {
-                                    formData.append('file', myRef1.current.files[i])
-                                }
-                                fetch(process.env.NEXT_PUBLIC_ENV_PROXIM_API + 'uploadimages', {
-                                    method: 'POST',
-                                    body: formData
-                                }).then(res => res.json())
-                                .then(data => {
-                                    let path_name = data.names
-                                    console.log(path_name)
-                                    let clone = [...homeImages]
-                                    clone = clone.concat(path_name)
-                                    console.log(clone)
-                                    setHomeImages(clone)
-                                })
-                            }}>Добавить</Button>
-                            </>
+                                    })
+                                }}>Добавить</Button>
+                                </>
+                            </div>
+                        </div>
+                        </div>
+                        <div style={{flex: 1, height: '50vh', overflow: 'auto', borderStyle: 'solid', borderWidth: '1px'}}>
+                            <HomeComponent images={homeImages} desription={homeDes} />
                         </div>
                     </div>
                 </>
